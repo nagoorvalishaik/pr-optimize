@@ -232,38 +232,7 @@
   function save() { try { localStorage.setItem(STORE, codeEl.value); } catch (e) {} }
   function setSample(on, name) { $("sampleTag").hidden = !on; $("fileName").textContent = name || (on ? "sample-email.html" : "email.html"); }
 
-  const SAMPLE = `<!-- Sample email: each check has a deliberate problem -->
-<table role="presentation" width="600" align="center" cellpadding="0" cellspacing="0">
-  <tr>
-    <td>
-      <a href="#TBD-viewonline">View online</a>
-      <img src="https://image.e.iqos.com/lib/fe8f/m/1/header.png" alt="Autumn sale" width="600">
-      <img src="https://www.w3schools.com/images/smiley.gif" alt="Smiley" width="48">
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <h1>Up to 40% off this weekend</h1>
-      <a href="https://www.example.com/offers" alias="hero_offer">Shop the sale</a>
-      <a href="https://www.w3schools.com">Learn more</a>
-      <a href="https://www.example.com/help" alias="hello.a">Help centre</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <!--[if mso]>
-        <v:roundrect href="https://www.example.com/offers" style="height:44px;width:220px;" arcsize="10%">
-      <!--[if mso]>
-      <a href="https://www.example.com/offers" alias="hero_offer">Shop now</a>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      %%=ContentBlockbyKey("unsubscribe_v2")=%%
-      <custom name="opencounter" type="tracking" />
-    </td>
-  </tr>
-</table>`;
+  const SAMPLE = ``;
 
   $("scanBtn").addEventListener("click", scan);
   codeEl.addEventListener("input", () => { setSample(false); clearTimeout(timer); timer = setTimeout(() => { codeChanged(); save(); }, 120); });
