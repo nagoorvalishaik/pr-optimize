@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Peer-review checker for SFMC email HTML: link aliases, image hosting, MSO tags, unsubscribe block and KPI tracking tags.">
+<title>Quick Peer Review Optimizer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <nav class="bar">
+    <div class="logo"><span class="logo-mark">a_</span>Alias Validator <small>· SFMC email QA</small></div>
+    <a class="gh" href="https://github.com/Balu-Phanendra-K/alias" target="_blank" rel="noopener">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-copy">
+      <span class="kicker">Quick Peer Review Optimizer</span>
+      <h1>Ship every email with <em>clean</em> aliases.</h1>
+      <p>Paste your HTML and press Validate to run seven peer-review checks. Click any result to jump straight to its line.</p>
+    </div>
+    <div class="checklist-mini" aria-label="Checks performed">
+      <span>Alias presence</span><span>Alias format</span><span>Duplicates</span><span>SFMC images</span><span>MSO tags</span><span>Unsubscribe block</span><span>KPI tracking</span>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="panel" aria-label="Email HTML">
+      <div class="panel-head">
+        <div class="file">
+          <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+          <span class="file-name" id="fileName">email.html</span>
+          <span class="pill" id="sampleTag">Sample</span>
+        </div>
+        <div class="actions">
+          <button class="btn" id="sampleBtn" type="button">Load sample</button>
+          <button class="btn" id="clearBtn" type="button">Clear</button>
+          <button class="btn" id="previewBtn" type="button">Preview</button>
+          <button class="btn primary" id="scanBtn" type="button" title="Validate (Ctrl + Enter)">Validate</button>
+        </div>
+      </div>
+      <div class="editor" id="editor">
+        <div class="gutter"><div class="gutter-inner" id="gutter"></div></div>
+        <textarea id="code" spellcheck="false" autocapitalize="off" autocomplete="off" wrap="off" placeholder="Paste your HTML code here, or drop an .html file" aria-label="Email HTML code"></textarea>
+        <div class="drop">Drop to load the .html file</div>
+      </div>
+      <div class="statusbar">
+        <span class="live" id="stateLabel">Not validated yet</span>
+        <span id="status">0 lines · 0 links · 0 images</span>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Review">
+      <div class="panel-head">
+        <div class="seg" role="tablist">
+          <button role="tab" aria-selected="true" data-view="checks">Results <span class="n" id="n-checks"></span></button>
+          <button role="tab" aria-selected="false" data-view="links">Aliases &amp; Links <span class="n" id="n-links"></span></button>
+        </div>
+        <button class="btn" type="button" data-preview>Open preview</button>
+      </div>
+      <div class="view" id="view-checks" role="tabpanel"></div>
+      <div class="view" id="view-links" role="tabpanel" hidden></div>
+    </section>
+  </main>
+</div>
+
+<div class="modal" id="pvModal" role="dialog" aria-modal="true" aria-labelledby="pvTitle" hidden>
+  <div class="modal-card">
+    <div class="modal-head">
+      <h2 id="pvTitle">Email preview</h2>
+      <div class="seg" aria-label="Preview size">
+        <button type="button" data-mode="both" aria-pressed="true">Desktop + Mobile</button>
+        <button type="button" data-mode="desktop" aria-pressed="false">Desktop</button>
+        <button type="button" data-mode="mobile" aria-pressed="false">Mobile</button>
+      </div>
+      <label class="auto"><input type="checkbox" id="autoPreview" checked> Open after Validate</label>
+      <button class="close" id="pvClose" type="button" aria-label="Close preview">&times;</button>
+    </div>
+    <div class="modal-stage" id="stage" data-mode="both">
+      <figure class="device desktop">
+        <figcaption>Desktop <span>800 px</span></figcaption>
+        <div class="screen"><iframe id="frameDesk" sandbox="" title="Desktop preview"></iframe></div>
+      </figure>
+      <figure class="device mobile">
+        <figcaption>Mobile <span>375 px</span></figcaption>
+        <div class="screen"><iframe id="frameMob" sandbox="" title="Mobile preview"></iframe></div>
+      </figure>
+    </div>
+    <div class="modal-foot">Scripts are disabled in the preview and AMPscript shows as plain text. Press Esc to close.</div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
