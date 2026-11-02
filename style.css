@@ -149,6 +149,9 @@ textarea#code::selection { background: var(--gold-soft); }
 .group-head h3 { margin: 0; font-size: 13.5px; font-weight: 600; letter-spacing: -0.01em; color: var(--fail); flex: 1; }
 .group.ok .group-head h3 { color: var(--pass); }
 .group.neutral .group-head h3 { color: var(--ink); }
+.group.warn .group-head .dot { background: var(--gold); box-shadow: 0 0 0 4px var(--gold-soft); }
+.group.warn .group-head h3 { color: var(--gold); }
+.row.warn .txt { color: var(--gold); }
 .count { font: 500 11px var(--font-mono); color: var(--ink-3); background: var(--panel-solid); border: 1px solid var(--line); border-radius: 999px; padding: 1px 8px; font-variant-numeric: tabular-nums; }
 .rows { list-style: none; margin: 0; padding: 4px; }
 .row { width: 100%; display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 14px; text-align: left; border: 0; background: transparent; border-radius: 8px; padding: 7px 10px; color: var(--ink); font: 500 13px/1.5 var(--font-ui); cursor: pointer; transition: background .12s; }
